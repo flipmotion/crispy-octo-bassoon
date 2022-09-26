@@ -1,14 +1,19 @@
+import Highlighted from './Highlighted';
+
 type TListItems = {
   items: string[],
   onSelect: (item: string) => void,
+  searchText: string, 
 }
 
 const ListItems = ({
   items,
   onSelect,
+  searchText,
 }: TListItems) => {
   const onClick = (item = '') => () => onSelect(item);
-  
+
+  console.log(searchText);
   return (
     <>
       <ul>
@@ -17,7 +22,7 @@ const ListItems = ({
             key={item + index}
             onClick={onClick(item)}
           >
-            {item}
+            <Highlighted text={item} search={searchText} />
           </li>
         ))}
       </ul>

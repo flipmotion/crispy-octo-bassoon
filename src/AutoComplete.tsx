@@ -20,18 +20,26 @@ const AutoComplete = () => {
       setResults([]);
       setIsLoading(false);
     } else {
-      setSearchText(v);
       setIsLoading(true);
-      search(v, setResults, setIsLoading);
+      search(v, setResults, setIsLoading).then(() => setSearchText(v));
     }
   };
 
-  const onSelect = (i = '') => alert(i);
+  const onSelect = (selectedItem = '') => alert(selectedItem);
 
   return (
     <>
-      <SearchField onSearch={onSerach} isLoading={isLoading} />
-      {isShownResults && <List items={results} onSelect={onSelect} />}
+      <SearchField
+        onSearch={onSerach}
+        isLoading={isLoading}
+      />
+      {isShownResults && (
+        <List
+          items={results}
+          onSelect={onSelect}
+          searchText={searchText}
+        />
+      )}
       {isShownNotFound && <p>not found</p>} 
     </>
   );
